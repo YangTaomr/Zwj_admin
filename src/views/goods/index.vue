@@ -6,7 +6,7 @@
       <userForm></userForm>
 
       <el-table
-          height="380"
+          height="500"
           :data="this.$store.state.rows"
           border
           style="width: 100%">
@@ -45,18 +45,53 @@
           <el-table-column
               label="操作">
             <template slot-scope="scope">
-              <el-button >编辑</el-button>
-              <el-button>删除</el-button>
+              <el-button size="small" @click="compiles(scope.row)">编辑</el-button>
+              <el-button size="small" @click="Delete(scope.row.id)" type="danger">删除</el-button>
             </template>
           </el-table-column>
       </el-table>
 
     <pagination></pagination>
 
+
+    <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+      <el-form ref="ruleForm">
+        <el-form-item label="商品名称" align="left" label-width="120px">
+          <el-input v-model="compile.name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="商品编码" align="left" label-width="120px">
+          <el-input v-model="compile.code" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="商品规格" align="left" label-width="120px">
+          <el-input v-model="compile.spec" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="零售价" align="left" label-width="120px">
+          <el-input v-model="compile.retailPrice" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="进货价" align="left" label-width="120px">
+          <el-input v-model="compile.purchasePrice" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="库存数量" align="left" label-width="120px">
+          <el-input v-model="compile.storageNum" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="供应商" align="left" label-width="120px">
+          <el-input v-model="compile.supplierName" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="cancel">取 消</el-button>
+        <el-button type="primary" @click="TRUE()">确 定</el-button>
+      </div>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
+// 接口
+import {goodsDelte} from "@/api/goods"
+
+// 组件
 import pagination from '@/views/modelu/pagination'
 import userForm from '@/views/modelu/user_form'
 import crumbs from '@/views/modelu/crumbs'
@@ -66,6 +101,8 @@ export default {
   data() {
     return {
       // 数据
+      compile:{},
+      dialogFormVisible:false
     };
   },
   components: {
@@ -87,6 +124,10 @@ export default {
     // el 被新创建的 vm. 替换，并挂载到实例上去之后调用该钩子。
     // 调用接口渲染数据
     this.$store.commit('GetCatehoryList')
+    this.$store.state.total=0,//总页数
+    this.$store.state.size= 20,//请求条数
+    this.$store.state.current= 1,//页码
+    this.$store.state.rows = [] //list数据
   },
   beforeUpdate() {
     // 数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前。 你可以在这个钩子中进一步地更改状态，这不会触发附加的重渲染过程。
@@ -109,7 +150,37 @@ export default {
   },
   methods: {
     // 方法定义
-
+    // 删除
+    Delete(id){
+      goodsDelte().then(res=>{
+        if (res.status==200){
+          this.$store.state.rows.filter(item=>{
+            if (item.id===id){
+              this.$store.state.rows.splice(item,1)
+            }
+          })
+          this.$message.success('删除成功 ');
+        }else{
+          this.$message.error('删除失败');
+        }
+      })
+    },
+    // 编辑
+    compiles(row){
+      this.dialogFormVisible=true
+      this.compile=row
+    },
+    cancel(){
+      this.dialogFormVisible=false
+    },
+    TRUE(){
+      this.dialogFormVisible=false
+      this.$store.state.rows.filter(item=>{
+        if (item===this.compile){
+          this.compile=item
+        }
+      })
+    }
   }
 };
 </script>

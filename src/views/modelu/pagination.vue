@@ -70,14 +70,13 @@ export default {
     // 分页
     handleSizeChange(val) {
       this.$store.commit('SIZE',val)
-      console.log(this.$store.state.size)
       this.$store.commit('GetCatehoryList')
+      this.$store.commit('GetstaffList')
     },
     handleCurrentChange(val) {
       this.$store.commit('CURRENT',val)
-      console.log(this.$store.state.current)
-
       this.$store.commit('GetCatehoryList')
+      this.$store.commit('GetstaffList')
     }
   }
 };
