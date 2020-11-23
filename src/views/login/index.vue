@@ -1,17 +1,32 @@
 <template>
-  <div>
+  <div class="admin">
     <!--    <template></template>  -->
-    我是登录
+    <div class="login">
+      <el-form :model="ruleForm" label-width="60px">
+        <el-form-item label="账号" prop="username">
+          <el-input type="text" v-model="ruleForm.username"></el-input>
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+          <el-input type="password" v-model="ruleForm.password"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="login()">登录</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>
 
 <script>
-
-
+import { getLogin } from "@/api/login";
 export default {
   data() {
     return {
       // 数据
+      ruleForm: {
+        username: "",
+        password: "",
+      },
     };
   },
   components: {
@@ -50,10 +65,46 @@ export default {
   },
   methods: {
     // 方法定义
-  }
+    login() {
+      getLogin(this.ruleForm.username, this.ruleForm.password).then((res) => {
+        console.log(res);
+        if (res.data.flag == true) {
+          this.$message.success("登录成功");
+          sessionStorage.setItem("token", res.data.data.token);
+          this.$router.push("/home");
+        } else {
+          this.$message.error("登陆失败");
+        }
+      });
+    },
+  },
 };
 </script>
 /*// css 样式*/
 <style scoped>
-
+.login {
+  width: 400px;
+  height: 240px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+}
+.admin {
+  width: 100%;
+  height: 100%;
+  /* background: red; */
+  position: relative;
+  background: url("https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1293924404,1442753026&fm=15&gp=0.jpg")
+    no-repeat;
+  background-size: 100% 100%;
+}
+.el-form {
+  width: 350px;
+  margin-left: 20px;
+  margin-top: 30px;
+}
 </style>
