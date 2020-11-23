@@ -68,7 +68,7 @@ export default {
     login() {
       getLogin(this.ruleForm.username, this.ruleForm.password).then((res) => {
         console.log(res);
-        if (res.data.flag == true) {
+        if (res.data.code == 2000) {
           this.$message.success("登录成功");
           sessionStorage.setItem("token", res.data.data.token);
           this.$router.push("/home");

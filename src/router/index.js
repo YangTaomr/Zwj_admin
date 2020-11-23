@@ -32,13 +32,13 @@ const routes = [
     name:'Home',
     redirect: '/index',
     component:Home,
-    beforeEnter(to,from,next){
+    beforeEnter(to, from, next){
       if(sessionStorage.getItem('token')){
         next()
       }else{
         next('/')
       }
-    }
+    },
   },
   {
     path:'/index',

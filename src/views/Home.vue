@@ -68,7 +68,7 @@ export default {
     async getLogout(){
       let {data:res} = await this.$axios.post('/pro-api/user/logout')
       if(res.flag == true){
-        this.$message.success('退出成功')
+        this.$message.info('退出成功')
         sessionStorage.removeItem('token')
         this.$router.push('/')
       }else{
