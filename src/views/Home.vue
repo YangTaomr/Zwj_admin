@@ -2,8 +2,19 @@
   <div class="home">
     <el-container>
       <el-header>
-        <img src="http://mengxuegu.com:9999/img/logo.7156be27.png" alt="">
-        <h3>积云后台管理系统</h3>
+        <div class="left">
+          <img src="http://mengxuegu.com:9999/img/logo.7156be27.png" alt="">
+          <h3>积云后台管理系统</h3>  
+        </div>	
+        <el-dropdown>
+        <span class="el-dropdown-link">
+          admin<i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>修改密码</el-dropdown-item>
+          <el-dropdown-item @click.native="getLogout()">退出登录</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
       </el-header>
       <el-container>
         <el-aside width="199px">
@@ -53,7 +64,18 @@ export default {
   },
   created() {},
   mounted() {},
-  methods: {},
+  methods: {
+    async getLogout(){
+      let {data:res} = await this.$axios.post('/pro-api/user/logout')
+      if(res.flag == true){
+        this.$message.success('退出成功')
+        sessionStorage.removeItem('token')
+        this.$router.push('/')
+      }else{
+        this.$message.error('退出失败')
+      }
+    }
+  },
 };
 </script>
 
@@ -70,8 +92,12 @@ export default {
   color: #333;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
-
+.left{
+  display: flex;
+  align-items: center;
+}
 .el-aside {
   background-color: #545c64;
   color: #333;
@@ -104,6 +130,9 @@ body > .el-container {
   margin-right: 10px;
 }
 .el-header h3{
+  color: #fff;
+}
+.el-dropdown{
   color: #fff;
 }
 </style>
