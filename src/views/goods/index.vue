@@ -1,6 +1,7 @@
 <template>
   <div>
     <!--    <template></template>  -->
+      <userForm></userForm>
 
       <el-table
           height="380"
@@ -55,6 +56,7 @@
 
 <script>
 import pagination from '@/views/modelu/pagination'
+import userForm from '@/views/modelu/user_form'
 
 
 export default {
@@ -66,6 +68,7 @@ export default {
   components: {
     // 组件注册
     pagination,
+    userForm,
   },
   beforeCreate() {
     // 在实例初始化之后，数据观测(data observer) 和 event/watcher 事件配置之前被调用。

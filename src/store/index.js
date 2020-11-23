@@ -14,6 +14,9 @@ export default new Vuex.Store({
     size: 20,//请求条数
     current: 1,//页码
     rows : [],//list数据
+    // 表单数据
+    fromlist:[],//表单placeholder
+    frombtn:[],//表单按钮
   },
   // 数据更改
   mutations: {
@@ -34,12 +37,15 @@ export default new Vuex.Store({
       goods(state.current, state.size).then(respoten=>{
         state.rows= respoten.data.data.rows
         state.total=respoten.data.data.total
+        state.fromlist=['商品名称','商品编号','商品供应商']
+
       })
     },
     GetstaffList(state){
       staff(state.current, state.size).then(respoten=>{
         state.rows= respoten.data.data.rows
         state.total=respoten.data.data.total
+        state.fromlist=['账号','姓名']
       })
     },
   },
