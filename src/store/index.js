@@ -9,11 +9,10 @@ export default new Vuex.Store({
   // 数据存储
   state: {
     // 分页数据
-    total:0,
-    size: 20,
-    current: 1,
-    rows : [],
-    form:0
+    total:0,//总页数
+    size: 20,//请求条数
+    current: 1,//页码
+    rows : [],//list数据
   },
   // 数据更改
   mutations: {
