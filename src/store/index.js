@@ -41,6 +41,7 @@ export default new Vuex.Store({
         state.total=respoten.data.data.total
         state.fromlist=['商品名称','商品编号','商品供应商']
         state.crumbs='商品管理'
+
       })
     },
     GetstaffList(state){

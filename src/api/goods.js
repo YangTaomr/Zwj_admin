@@ -7,3 +7,10 @@ export function goods(data){
         data
     })
 }
+export function goodsDelte(data){
+    return request({
+        url:'/pro-api/goods/10',
+        method:'DELETE',
+        data
+    })
+}
