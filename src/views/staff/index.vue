@@ -1,11 +1,62 @@
 <template>
   <div>
     <!--    <template></template>  -->
-    我是员工
+<!--    age: 104-->
+<!--    entryDate: "2002-06-18"-->
+<!--    id: 10-->
+<!--    mobile: "87454225719"-->
+<!--    name: "许娜"-->
+<!--    salary: 10379.4-->
+<!--    username: "kuoer"-->
+    <el-table
+        height="480"
+        :data="this.$store.state.rows"
+        border
+        style="width: 100%">
+      <el-table-column
+          type="index"
+          label="序号">
+      </el-table-column>
+      <el-table-column
+          prop="username"
+          label="账号">
+      </el-table-column>
+      <el-table-column
+          prop="name"
+          label="姓名">
+      </el-table-column>
+      <el-table-column
+          prop="age"
+          label="年龄">
+      </el-table-column>
+      <el-table-column
+          prop="mobile"
+          label="电话">
+      </el-table-column>
+      <el-table-column
+          prop="salary"
+          label="薪酬">
+      </el-table-column>
+      <el-table-column
+          prop="entryDate"
+          label="入职时间">
+      </el-table-column>
+      <el-table-column
+          label="操作">
+        <template slot-scope="scope">
+          <el-button >编辑</el-button>
+          <el-button>删除</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+
+    <pagination></pagination>
+
   </div>
 </template>
 
 <script>
+import pagination from '@/views/modelu/pagination'
 
 
 export default {
@@ -16,6 +67,7 @@ export default {
   },
   components: {
     // 组件注册
+    pagination,
   },
   beforeCreate() {
     // 在实例初始化之后，数据观测(data observer) 和 event/watcher 事件配置之前被调用。
@@ -28,6 +80,8 @@ export default {
   },
   mounted() {
     // el 被新创建的 vm. 替换，并挂载到实例上去之后调用该钩子。
+    // 调用接口渲染数据
+    this.$store.commit('GetstaffList')
   },
   beforeUpdate() {
     // 数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前。 你可以在这个钩子中进一步地更改状态，这不会触发附加的重渲染过程。
@@ -50,6 +104,7 @@ export default {
   },
   methods: {
     // 方法定义
+
   }
 };
 </script>

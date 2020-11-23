@@ -3,6 +3,7 @@
     <!--    <template></template>  -->
 
       <el-table
+          height="380"
           :data="this.$store.state.rows"
           border
           style="width: 100%">

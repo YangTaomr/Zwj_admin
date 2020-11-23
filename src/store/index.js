@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 // 接口api
 import {users} from "@/api/user";
+import {staff} from "@/api/staff";
 
 Vue.use(Vuex);
 
@@ -31,6 +32,12 @@ export default new Vuex.Store({
     // 商品初始页面获取数据
     GetCatehoryList(state){
       users(state.current, state.size).then(respoten=>{
+        state.rows= respoten.data.data.rows
+        state.total=respoten.data.data.total
+      })
+    },
+    GetstaffList(state){
+      staff(state.current, state.size).then(respoten=>{
         state.rows= respoten.data.data.rows
         state.total=respoten.data.data.total
       })
