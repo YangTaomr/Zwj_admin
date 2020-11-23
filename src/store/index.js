@@ -9,6 +9,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   // 数据存储
   state: {
+    // 面包屑
+    crumbs:'',
     // 分页数据
     total:0,//总页数
     size: 20,//请求条数
@@ -38,7 +40,7 @@ export default new Vuex.Store({
         state.rows= respoten.data.data.rows
         state.total=respoten.data.data.total
         state.fromlist=['商品名称','商品编号','商品供应商']
-
+        state.crumbs='商品管理'
       })
     },
     GetstaffList(state){
@@ -46,6 +48,7 @@ export default new Vuex.Store({
         state.rows= respoten.data.data.rows
         state.total=respoten.data.data.total
         state.fromlist=['账号','姓名']
+        state.crumbs='员工管理'
       })
     },
   },

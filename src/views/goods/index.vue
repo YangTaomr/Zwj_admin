@@ -1,6 +1,8 @@
 <template>
   <div>
     <!--    <template></template>  -->
+    <crumbs></crumbs>
+
       <userForm></userForm>
 
       <el-table
@@ -57,6 +59,7 @@
 <script>
 import pagination from '@/views/modelu/pagination'
 import userForm from '@/views/modelu/user_form'
+import crumbs from '@/views/modelu/crumbs'
 
 
 export default {
@@ -69,6 +72,7 @@ export default {
     // 组件注册
     pagination,
     userForm,
+    crumbs,
   },
   beforeCreate() {
     // 在实例初始化之后，数据观测(data observer) 和 event/watcher 事件配置之前被调用。
