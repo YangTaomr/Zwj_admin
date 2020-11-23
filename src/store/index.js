@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 // 接口api
+import {members} from "@/api/member";
 import {goods} from "@/api/goods";
 import {staff} from "@/api/staff";
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     size: 20,//请求条数
     current: 1,//页码
     rows : [],//list数据
+    huiyuan:[] , //会员数据
     // 表单数据
     fromlist:[],//表单placeholder
     frombtn:[],//表单按钮
@@ -49,6 +51,15 @@ export default new Vuex.Store({
         state.total=respoten.data.data.total
         state.fromlist=['账号','姓名']
         state.crumbs='员工管理'
+      })
+    },
+     // 会员管理列表
+     huiyuanList(state){
+      members(state.current, state.size).then(res=>{
+        state.huiyuan= res.data.data.rows
+        state.total=res.data.data.total
+        // state.fromlist=['账号','姓名']
+        state.crumbs='会员管理'
       })
     },
   },

@@ -72,11 +72,13 @@ export default {
       this.$store.commit('SIZE',val)
       this.$store.commit('GetCatehoryList')
       this.$store.commit('GetstaffList')
+      this.$store.commit('huiyuanList')
     },
     handleCurrentChange(val) {
       this.$store.commit('CURRENT',val)
       this.$store.commit('GetCatehoryList')
       this.$store.commit('GetstaffList')
+      this.$store.commit('huiyuanList')
     }
   }
 };
