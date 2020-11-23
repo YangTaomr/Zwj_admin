@@ -124,6 +124,10 @@ export default {
     // el 被新创建的 vm. 替换，并挂载到实例上去之后调用该钩子。
     // 调用接口渲染数据
     this.$store.commit('GetCatehoryList')
+    this.$store.state.total=0,//总页数
+    this.$store.state.size= 20,//请求条数
+    this.$store.state.current= 1,//页码
+    this.$store.state.rows = [] //list数据
   },
   beforeUpdate() {
     // 数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前。 你可以在这个钩子中进一步地更改状态，这不会触发附加的重渲染过程。
@@ -157,14 +161,13 @@ export default {
           })
           this.$message.success('删除成功 ');
         }else{
-          this.$message.error('删除失败 ');
+          this.$message.error('删除失败');
         }
       })
     },
     // 编辑
     compiles(row){
       this.dialogFormVisible=true
-      console.log(this.$store.state.dialogFormVisible)
       this.compile=row
     },
     cancel(){
