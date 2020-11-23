@@ -57,7 +57,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped>
 .el-menu{
   width: 199px;
 }

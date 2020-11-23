@@ -1,7 +1,6 @@
 <template>
   <div>
     <!--    <template></template>  -->
-    <from_modelu></from_modelu>
 
       <el-table
           :data="this.$store.state.rows"
@@ -55,7 +54,6 @@
 
 <script>
 import pagination from '@/views/modelu/pagination'
-import from_modelu from '@/views/modelu/from'
 
 
 export default {
@@ -67,7 +65,6 @@ export default {
   components: {
     // 组件注册
     pagination,
-    from_modelu
   },
   beforeCreate() {
     // 在实例初始化之后，数据观测(data observer) 和 event/watcher 事件配置之前被调用。
